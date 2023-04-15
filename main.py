@@ -7,7 +7,7 @@ def splitLine(line, n):
 
 
 def readimage():
-    with open('img2.pbm', "rb") as image:
+    with open('img.pbm', "rb") as image:
         imageBytesArray = []
         lines = image.readlines()
 

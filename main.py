@@ -7,7 +7,7 @@ def splitLine(line, n):
 
 
 def readimage():
-    with open('img.pbm', "rb") as image:
+    with open('img2.pbm', "rb") as image:
         imageBytesArray = []
         lines = image.readlines()
 
@@ -25,7 +25,7 @@ def showImage(header, array):
     for line in header:
         f.write(line)
     for row in array:
-        newLine = (''.join([str(byte) for byte in row]) + '\n').encode()
+        newLine = (''.join([str(byte) for byte in row[:-2]]) + '\n').encode()
         f.write(newLine)
     f.close()
 
@@ -96,6 +96,8 @@ if __name__ == '__main__':
         one_line = ''
         for n in range(0, len(line) - 1, 12):
             tempL, tempR = splitLine(line, n)
+            # Uncomment next line to make it CBC
+            #tempL, tempR = IVboxIT(tempL, tempR)
             Llist = [0 for i in range(number_of_rounds + 1)]
             Rlist = [0 for i in range(number_of_rounds + 1)]
             Llist[0] = tempL
@@ -107,7 +109,3 @@ if __name__ == '__main__':
         result.append(one_line)
 
     showImage(image['header'], result)
-
-
-
-
